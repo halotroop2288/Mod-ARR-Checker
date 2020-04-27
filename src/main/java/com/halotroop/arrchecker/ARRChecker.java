@@ -20,13 +20,13 @@ public class ARRChecker implements ModInitializer
 		{
 			ModMetadata modMeta = mod.getMetadata();
 			// Assume all authors don't know how capitalization works, and don't use an array for the string!
-			String modLicense = modMeta.getLicense().toString().toLowerCase().replace('[', ' ').replace(']', ' ').strip();
+			String modLicense = modMeta.getLicense().toString().toLowerCase().replace('[', ' ').replace(']', ' ').trim();
 			// Create a constant of the mod name and ID to be used multiple times: Don't use an array for the string!
-			String modNameAndID = (modMeta.getName() + " (" + modMeta.getId() + ")").replace('[', ' ').replace(']', ' ').strip();
+			String modNameAndID = (modMeta.getName() + " (" + modMeta.getId() + ")").replace('[', ' ').replace(']', ' ').trim();
 			// Give a different warning for Minecraft itself.
 			if (modMeta.getId() != "minecraft")
 			{
-				if (modLicense == null || modLicense.isBlank() || modLicense.isEmpty())
+				if (modLicense == null || modLicense.isEmpty() || modLicense.isEmpty())
 				{
 					// If no license is found, assume mod is not correctly licensed, and therefore, not modpack-friendly.
 					System.out.println(modNameAndID + " has no license! It may be ARR!");
@@ -67,11 +67,11 @@ public class ARRChecker implements ModInitializer
 			for (String mod : arrMods)
 			{
 				invalidMods = invalidMods
-					+ (invalidMods.isBlank() ? mod
+					+ (invalidMods.isEmpty() ? mod
 					: arrMods.get(arrMods.size() - 1).equals(mod) ? (" and " + mod)
 					: (", " + mod));
 			}
-			if (!invalidMods.isBlank()) System.out.println(arrMods.size() == 1 ?
+			if (!invalidMods.isEmpty()) System.out.println(arrMods.size() == 1 ?
 					"This mod" : "These mods" + " may not be suitable for a modpack:\n" + invalidMods);
 		}
 		System.out.println("Minecraft isn't a mod, but in case you didn't know, it's ARR!\n" + "Don't distribute it!");
