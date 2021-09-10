@@ -63,15 +63,14 @@ public class ARRChecker implements ModInitializer
 		}
 		if (!arrMods.isEmpty())
 		{
-			String invalidMods = "";
+			StringBuilder invalidMods = new StringBuilder();
 			for (String mod : arrMods)
 			{
-				invalidMods = invalidMods
-					+ (invalidMods.isEmpty() ? mod
+				invalidMods.append((invalidMods.length() == 0 ? mod
 					: arrMods.get(arrMods.size() - 1).equals(mod) ? (" and " + mod)
-					: (", " + mod));
+					: (", " + mod)));
 			}
-			if (!invalidMods.isEmpty()) System.out.println(arrMods.size() == 1 ?
+			if (invalidMods.length() != 0) System.out.println(arrMods.size() == 1 ?
 					"This mod" : "These mods" + " may not be suitable for a modpack:\n" + invalidMods);
 		}
 		System.out.println("Minecraft isn't a mod, but in case you didn't know, it's ARR!\n" + "Don't distribute it!");
