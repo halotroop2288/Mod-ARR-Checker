@@ -52,15 +52,21 @@ public class ARRChecker implements ModInitializer {
         }
         if (!arrMods.isEmpty()) {
             StringBuilder invalidMods = new StringBuilder();
-            for (String mod : arrMods) {
-                invalidMods.append((invalidMods.length() == 0 ? mod
-                        : arrMods.get(arrMods.size() - 1).equals(mod) ? (" and " + mod)
-                        : (", " + mod)));
+            for (int i = 0, arrModsSize = arrMods.size(); i < arrModsSize; i++) {
+                String mod = arrMods.get(i);
+                if (invalidMods.length() > 0) {
+                    boolean isLastElement = i == arrModsSize - 1;
+                    invalidMods.append(isLastElement ? " and " : ", ");
+                }
+                invalidMods.append(mod);
             }
-            if (invalidMods.length() != 0) System.out.println(arrMods.size() == 1 ?
-                    "This mod" : "These mods" + " may not be suitable for a modpack:\n" + invalidMods);
+            if (invalidMods.length() != 0) {
+                System.out.println(arrMods.size() == 1 ? "This mod" : "These mods" +
+                        " may not be suitable for a modpack:\n" + invalidMods);
+            }
         }
-        System.out.println("Minecraft isn't a mod, but in case you didn't know, it's ARR!\n" + "Don't distribute it!");
+        System.out.println("Minecraft isn't a mod, but in case you didn't know, it's ARR!");
+        System.out.println("Don't distribute it!");
     }
 
     public static List<String> getARRMods() {
