@@ -10,8 +10,8 @@ import net.fabricmc.loader.api.metadata.ModMetadata;
 
 public class ARRChecker implements ModInitializer
 {
-	private static List<String> arrMods = new ArrayList<String>();
-	
+	private static final List<String> arrMods = new ArrayList<>();
+
 	@Override
 	public void onInitialize()
 	{
@@ -26,7 +26,7 @@ public class ARRChecker implements ModInitializer
 			// Give a different warning for Minecraft itself.
 			if (!modMeta.getId().equals("minecraft"))
 			{
-				if (modLicense == null || modLicense.isEmpty())
+				if (modLicense.isEmpty())
 				{
 					// If no license is found, assume mod is not correctly licensed, and therefore, not modpack-friendly.
 					System.out.println(modNameAndID + " has no license! It may be ARR!");
@@ -45,7 +45,7 @@ public class ARRChecker implements ModInitializer
 							"gpl", "mit", "cc0", "apache", "unlicense", "mpl", // Short form names
 							"gnu public license", "mozilla public license", "creative commons" // Long form (incorrect, but check anyway)
 						};
-					Boolean modLicenseInvalid = true;
+					boolean modLicenseInvalid = true;
 					for (String validLicense : validLicenses)
 					{
 						// If a valid license is found, set invalid to false, and stop checking
