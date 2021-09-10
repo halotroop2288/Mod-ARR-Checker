@@ -24,14 +24,14 @@ public class ARRChecker implements ModInitializer {
             // Create a constant of the mod name and ID to be used multiple times: Don't use an array for the string!
             String modNameAndID = (modMeta.getName() + " (" + modMeta.getId() + ")").replace('[', ' ').replace(']', ' ').trim();
             // Give a different warning for Minecraft itself.
-            if (!modMeta.getId().equals("minecraft")) {
+            if (!modMeta.getId().equals("minecraft") && !modMeta.getId().equals("java")) {
                 if (modLicense.isEmpty()) {
                     // If no license is found, assume mod is not correctly licensed, and therefore, not modpack-friendly.
                     LOGGER.warn(modNameAndID + " has no license! It may be ARR!");
                     arrMods.add(modMeta.getId());
                 } else if (modLicense.equals("all rights reserved") || modLicense.equals("arr") || modLicense.contains("copyright")) {
                     // If license is All Rights Reserved, or copyright is attributed, assume mod is not modpack-friendly.
-                    LOGGER.warn(modNameAndID + " is ARR. Do not use it( in a modpack)!");
+                    LOGGER.warn(modNameAndID + " is ARR. Do not use it in a modpack!");
                     arrMods.add(modMeta.getId());
                 } else {
                     String[] validLicenses =
