@@ -26,7 +26,7 @@ public class ARRChecker implements ModInitializer
 			// Give a different warning for Minecraft itself.
 			if (modMeta.getId() != "minecraft")
 			{
-				if (modLicense == null || modLicense.isEmpty() || modLicense.isEmpty())
+				if (modLicense == null || modLicense.isEmpty())
 				{
 					// If no license is found, assume mod is not correctly licensed, and therefore, not modpack-friendly.
 					System.out.println(modNameAndID + " has no license! It may be ARR!");
