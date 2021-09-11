@@ -14,7 +14,7 @@
     "sources": "https://github.com/halotroop2288/Mod-ARR-Checker"
   },
 
-  "license": "GPLv3",
+  "license": "MIT",
   "icon": "assets/arrchecker/icon.png",
 
   "environment": "*",
