@@ -6,12 +6,27 @@
   "name": "ARR Checker",
   "description": "Checks all other present mods' licenses. If an ARR mod, or one with an invalid license is found, it will be printed in the console.",
   "authors": [
-    "halotroop2288",
-    "Caroline Bell"
+    {
+      "name": "halotroop2288",
+      "contact": {
+        "homepage": "https://halotroop.com"
+        "email": "carolinejoybell@gmail.com"
+        "sources": "https://github.com/halotroop2288/Mod-ARR-Checker"
+      }
+  ],
+  "contributors": [
+      {
+        "name": "macbrayne",
+        "contact": {
+          "sources": "https://github.com/macbrayne/Mod-ARR-Checker",
+          "homepage": "https://macbrayne.de"
+        }
+      }
   ],
   "contact": {
-    "homepage": "https://halotroop.com/",
-    "sources": "https://github.com/halotroop2288/Mod-ARR-Checker"
+    "homepage": "https://halotroop.com/posts/arrchecker",
+    "sources": "https://github.com/halotroop2288/Mod-ARR-Checker",
+    "issues": "https://github.com/halotroop2288/Mod-ARR-Checker/issues"
   },
 
   "license": "MIT",
