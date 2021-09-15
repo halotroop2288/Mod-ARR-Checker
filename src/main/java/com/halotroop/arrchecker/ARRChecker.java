@@ -1,14 +1,14 @@
 package com.halotroop.arrchecker;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ARRChecker implements ModInitializer {
     private static final List<String> arrMods = new ArrayList<>();
@@ -20,11 +20,12 @@ public class ARRChecker implements ModInitializer {
         for (ModContainer mod : FabricLoader.getInstance().getAllMods()) {
             ModMetadata modMeta = mod.getMetadata();
             // Assume all authors don't know how capitalization works, and don't use an array for the string!
-            String modLicense = modMeta.getLicense().toString().toLowerCase().replace('[', ' ').replace(']', ' ').trim();
+            // '-' is being replaced with ' ' due to some mod authors having specified their creative commons license without '-' but with spaces instead
+            final String modLicense = modMeta.getLicense().toString().toLowerCase().replaceAll("[\\[\\]-]", " ").trim();
             // Create a constant of the mod name and ID to be used multiple times: Don't use an array for the string!
-            String modNameAndID = (modMeta.getName() + " (" + modMeta.getId() + ")").replace('[', ' ').replace(']', ' ').trim();
-            // Give a different warning for Minecraft itself.
-            if (!modMeta.getId().equals("minecraft") && !modMeta.getId().equals("java")) {
+            final String modNameAndID = (modMeta.getName() + " (" + modMeta.getId() + ")").replaceAll("[\\[\\]]", " ").trim();
+            // Ignore built in mods
+            if (!modMeta.getType().equals("builtin")) {
                 if (modLicense.isEmpty()) {
                     // If no license is found, assume mod is not correctly licensed, and therefore, not modpack-friendly.
                     LOGGER.warn(modNameAndID + " has no license! It may be ARR!");
@@ -37,7 +38,7 @@ public class ARRChecker implements ModInitializer {
                     String[] validLicenses =
                             {
                                     "gpl", "mit", "cc0", "apache", "unlicense", "mpl", // Short form names
-                                    "gnu public license", "mozilla public license", "creative commons" // Long form (incorrect, but check anyway)
+                                    "gnu lesser general public license", "gnu general public license", "mozilla public license", "creative commons", "cc by nc" // Long form (incorrect, but check anyway)
                             };
                     boolean modLicenseInvalid = true;
                     for (String validLicense : validLicenses) {
